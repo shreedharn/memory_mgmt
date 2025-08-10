@@ -95,9 +95,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │                 │    │                 │
 │ 0x2010: int...  │    │                 │    │                 │
 │ 0x2020: malloc  │    │                 │    │                 │
-│ 0x2030: printf  │    │                 │    │                 │
-│ 0x2040: free()  │    │                 │    │                 │
-│ 0x2050: return  │    │                 │    │                 │
+│ 0x2030: *ptr=.. │    │                 │    │                 │
+│ 0x2040: printf  │    │                 │    │                 │
+│ 0x2050: free()  │    │                 │    │                 │
+│ 0x2060: return  │    │                 │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
@@ -115,9 +116,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │ 0x7FF0: stack_  │    │                 │
 │ 0x2010: int...  │    │         var=5   │    │                 │
 │ 0x2020: malloc  │    └─────────────────┘    │                 │
-│ 0x2030: printf  │                           │                 │
-│ 0x2040: free()  │                           │                 │
-│ 0x2050: return  │                           │                 │
+│ 0x2030: *ptr=.. │                           │                 │
+│ 0x2040: printf  │                           │                 │
+│ 0x2050: free()  │                           │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
@@ -135,9 +137,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │         var=5   │    │                 │
 │ 0x2010: int...  │    └─────────────────┘    │                 │
 │ 0x2020: malloc  │                           │                 │
-│ 0x2030: printf  │                           │                 │
-│ 0x2040: free()  │                           │                 │
-│ 0x2050: return  │                           │                 │
+│ 0x2030: *ptr=.. │                           │                 │
+│ 0x2040: printf  │                           │                 │
+│ 0x2050: free()  │                           │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
@@ -155,9 +158,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │ ←IP│         var=5   │    │                 │
 │ 0x2010: int...  │    └─────────────────┘    │                 │
 │ 0x2020: malloc  │                           │                 │
-│ 0x2030: printf  │                           │                 │
-│ 0x2040: free()  │                           │                 │
-│ 0x2050: return  │                           │                 │
+│ 0x2030: *ptr=.. │                           │                 │
+│ 0x2040: printf  │                           │                 │
+│ 0x2050: free()  │                           │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
@@ -175,9 +179,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │         =0x1030 │    │                 │
 │ 0x2010: int...  │ ←IP│ 0x7FF0: stack_  │    │                 │
 │ 0x2020: malloc  │    │         var=5   │    │                 │
-│ 0x2030: printf  │    └─────────────────┘    │                 │
-│ 0x2040: free()  │                           │                 │
-│ 0x2050: return  │                           │                 │
+│ 0x2030: *ptr=.. │    └─────────────────┘    │                 │
+│ 0x2040: printf  │                           │                 │
+│ 0x2050: free()  │                           │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
@@ -195,9 +200,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │ 0x7FE0: param=5 │    │                 │
 │ 0x2010: int...  │    │ 0x7FE8: ret addr│    │                 │
 │ 0x2020: malloc  │ ←IP│         =0x1030 │    │                 │
-│ 0x2030: printf  │    │ 0x7FF0: stack_  │    │                 │
-│ 0x2040: free()  │    │         var=5   │    │                 │
-│ 0x2050: return  │    └─────────────────┘    │                 │
+│ 0x2030: *ptr=.. │    │ 0x7FF0: stack_  │    │                 │
+│ 0x2040: printf  │    │         var=5   │    │                 │
+│ 0x2050: free()  │    └─────────────────┘    │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
@@ -215,14 +221,15 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │ 0x7FE0: param=5 │    │                 │
 │ 0x2010: int...  │    │ 0x7FE8: ret addr│    │                 │
 │ 0x2020: malloc  │    │         =0x1030 │    │                 │
-│ 0x2030: printf  │ ←IP│ 0x7FF0: stack_  │    │                 │
-│ 0x2040: free()  │    │         var=5   │    │                 │
-│ 0x2050: return  │    └─────────────────┘    │                 │
+│ 0x2030: *ptr=.. │ ←IP│ 0x7FF0: stack_  │    │                 │
+│ 0x2040: printf  │    │         var=5   │    │                 │
+│ 0x2050: free()  │    └─────────────────┘    │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
 ### Step 8: Execute printf() statement (output to console)
-**Instruction Pointer**: 0x2030 (printf is a function call)
+**Instruction Pointer**: 0x2040 (printf is a function call)
 **Action**: Read local_var (10) and *heap_ptr (20), format and print output
 
 **Output**: `foo: local=10, heap=20`
@@ -237,14 +244,15 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │ 0x7FE0: param=5 │    │                 │
 │ 0x2010: int...  │    │ 0x7FE8: ret addr│    │                 │
 │ 0x2020: malloc  │    │         =0x1030 │    │                 │
-│ 0x2030: printf  │    │ 0x7FF0: stack_  │    │                 │
-│ 0x2040: free()  │ ←IP│         var=5   │    │                 │
-│ 0x2050: return  │    └─────────────────┘    │                 │
+│ 0x2030: *ptr=.. │    │ 0x7FF0: stack_  │    │                 │
+│ 0x2040: printf  │ ←IP│         var=5   │    │                 │
+│ 0x2050: free()  │    └─────────────────┘    │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
 ### Step 9: Execute free(heap_ptr) (heap deallocation)
-**Instruction Pointer**: 0x2040
+**Instruction Pointer**: 0x2050
 **Action**: Return heap block at 0x8000 to heap manager, mark as available
 
 ```
@@ -257,14 +265,15 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │ 0x7FE0: param=5 │    │                 │
 │ 0x2010: int...  │    │ 0x7FE8: ret addr│    │                 │
 │ 0x2020: malloc  │    │         =0x1030 │    │                 │
-│ 0x2030: printf  │    │ 0x7FF0: stack_  │    │                 │
-│ 0x2040: free()  │    │         var=5   │    │                 │
-│ 0x2050: return  │ ←IP└─────────────────┘    │                 │
+│ 0x2030: *ptr=.. │    │ 0x7FF0: stack_  │    │                 │
+│ 0x2040: printf  │    │         var=5   │    │                 │
+│ 0x2050: free()  │ ←IP│                 │    │                 │
+│ 0x2060: return  │    └─────────────────┘    │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
 ### Step 10: Return from foo() (control back to main)
-**Instruction Pointer**: 0x2050 → 0x1030 (return address from stack)
+**Instruction Pointer**: 0x2060 → 0x1030 (return address from stack)
 **Action**: Destroy foo's stack frame, resume main's execution
 
 ```
@@ -277,9 +286,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │         var=5   │    │                 │
 │ 0x2010: int...  │    └─────────────────┘    │                 │
 │ 0x2020: malloc  │                           │                 │
-│ 0x2030: printf  │                           │                 │
-│ 0x2040: free()  │                           │                 │
-│ 0x2050: return  │                           │                 │
+│ 0x2030: *ptr=.. │                           │                 │
+│ 0x2040: printf  │                           │                 │
+│ 0x2050: free()  │                           │                 │
+│ 0x2060: return  │                           │                 │
 └─────────────────┘                           └─────────────────┘
 ```
 
@@ -297,9 +307,10 @@ Code Segment:          Stack:                 Heap:
 │ 0x2000: foo()   │    │                 │    │                 │
 │ 0x2010: int...  │    │                 │    │                 │
 │ 0x2020: malloc  │    │                 │    │                 │
-│ 0x2030: printf  │    │                 │    │                 │
-│ 0x2040: free()  │    │                 │    │                 │
-│ 0x2050: return  │    │                 │    │                 │
+│ 0x2030: *ptr=.. │    │                 │    │                 │
+│ 0x2040: printf  │    │                 │    │                 │
+│ 0x2050: free()  │    │                 │    │                 │
+│ 0x2060: return  │    │                 │    │                 │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
