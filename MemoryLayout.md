@@ -65,20 +65,20 @@ Let's trace through this example program:
 #include <stdio.h>
 #include <stdlib.h>
 
-void foo(int param) {
-    int local_var = param * 2;
-    int *heap_ptr = malloc(sizeof(int));
-    *heap_ptr = local_var + 10;
+void foo(int param) {                    // Called by main(), param receives stack_var value (5)
+    int local_var = param * 2;           // Stack allocation: local_var = 5 * 2 = 10
+    int *heap_ptr = malloc(sizeof(int)); // Heap allocation: request 4 bytes, returns heap address
+    *heap_ptr = local_var + 10;          // Store value 20 (10+10) at heap address
     
-    printf("foo: local=%d, heap=%d\n", local_var, *heap_ptr);
+    printf("foo: local=%d, heap=%d\n", local_var, *heap_ptr); // Print: local=10, heap=20
     
-    free(heap_ptr);
-}
+    free(heap_ptr);                      // Deallocate heap memory, make address available
+}                                        // Return to main(), local variables destroyed
 
-int main() {
-    int stack_var = 5;
-    foo(stack_var);
-    return 0;
+int main() {                             // Entry point: called by OS runtime
+    int stack_var = 5;                   // Stack allocation: store literal 5 in main's frame
+    foo(stack_var);                      // Function call: pass stack_var value to foo()
+    return 0;                            // Return success status to OS, program terminates
 }
 ```
 
@@ -101,8 +101,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-### Step 2: Execute "int stack_var = 5;"
+### Step 2: Execute "int stack_var = 5;" (main's local variable)
 **Instruction Pointer**: 0x1010
+**Action**: Allocate 4 bytes on main's stack frame and store literal value 5
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -120,8 +121,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 3: Prepare for foo(stack_var) call
+### Step 3: Prepare for foo(stack_var) call (main calls foo)
 **Instruction Pointer**: 0x1020
+**Action**: Copy stack_var value (5) to parameter, push return address (0x1030) on stack
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -139,8 +141,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 4: Jump to foo() function
+### Step 4: Jump to foo() function (control transfer to foo)
 **Instruction Pointer**: 0x2000 (foo function start)
+**Action**: Begin executing foo with param=5, main's execution paused
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -158,8 +161,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 5: Execute "int local_var = param * 2;"
+### Step 5: Execute "int local_var = param * 2;" (foo's local variable)
 **Instruction Pointer**: 0x2010
+**Action**: Allocate 4 bytes in foo's frame, calculate 5*2=10, store result
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -177,8 +181,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 6: Execute malloc(sizeof(int))
+### Step 6: Execute malloc(sizeof(int)) (heap allocation)
 **Instruction Pointer**: 0x2020
+**Action**: Request 4 bytes from heap manager, receive address 0x8000
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -196,8 +201,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 7: Execute "*heap_ptr = local_var + 10;"
+### Step 7: Execute "*heap_ptr = local_var + 10;" (store to heap)
 **Instruction Pointer**: 0x2030
+**Action**: Calculate 10+10=20, store value 20 at heap address 0x8000
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -215,8 +221,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 8: Execute printf() statement
+### Step 8: Execute printf() statement (output to console)
 **Instruction Pointer**: 0x2030 (printf is a function call)
+**Action**: Read local_var (10) and *heap_ptr (20), format and print output
 
 **Output**: `foo: local=10, heap=20`
 
@@ -236,8 +243,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 9: Execute free(heap_ptr)
+### Step 9: Execute free(heap_ptr) (heap deallocation)
 **Instruction Pointer**: 0x2040
+**Action**: Return heap block at 0x8000 to heap manager, mark as available
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -255,8 +263,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 10: Return from foo()
+### Step 10: Return from foo() (control back to main)
 **Instruction Pointer**: 0x2050 → 0x1030 (return address from stack)
+**Action**: Destroy foo's stack frame, resume main's execution
 
 ```
 Code Segment:          Stack:                 Heap:
@@ -274,8 +283,9 @@ Code Segment:          Stack:                 Heap:
 └─────────────────┘                           └─────────────────┘
 ```
 
-### Step 11: Execute return 0 from main()
+### Step 11: Execute return 0 from main() (program termination)
 **Instruction Pointer**: 0x1030
+**Action**: Return success status (0) to OS, destroy main's frame
 
 ```
 Code Segment:          Stack:                 Heap:

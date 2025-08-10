@@ -59,6 +59,32 @@ Memory Layout Overview:
 
 ## Step-by-Step Program Execution
 
+### Intel x86-64 Register Overview
+
+Before diving into the assembly code, let's understand the key registers:
+
+#### **Stack and Frame Management Registers:**
+- **RSP (Stack Pointer)**: Points to the top of the current stack frame
+- **RBP (Base Pointer)**: Points to the base of the current function's stack frame, used to access local variables and parameters
+
+#### **General Purpose Registers:**
+- **RAX/EAX**: Primary accumulator, stores function return values
+- **RDI/EDI**: First function parameter in x86-64 calling convention
+- **RSI/ESI**: Second function parameter, also used for string operations
+- **RDX/EDX**: Third function parameter, general purpose register
+- **RCX/ECX**: Fourth function parameter, counter for loops
+
+#### **Instruction Pointer:**
+- **RIP**: Points to the next instruction to be executed (cannot be directly modified)
+
+#### **Register Size Conventions:**
+- **64-bit**: RAX, RBP, RSP, RDI, RSI, RDX, RCX, etc.
+- **32-bit**: EAX, EBP, ESP, EDI, ESI, EDX, ECX, etc.
+- **16-bit**: AX, BP, SP, DI, SI, DX, CX, etc.
+- **8-bit**: AL/AH (low/high byte of AX)
+
+---
+
 Let's trace through this example program:
 
 ```asm
@@ -66,51 +92,51 @@ Let's trace through this example program:
 .globl main
 
 foo:
-    push    %rbp                    ; save caller's frame pointer
-    mov     %rsp, %rbp              ; set up new frame pointer
-    sub     $24, %rsp               ; allocate 24 bytes for local variables
+    push    %rbp                    ; save main()'s frame pointer (caller = main)
+    mov     %rsp, %rbp              ; set up foo()'s frame pointer base
+    sub     $24, %rsp               ; allocate 24 bytes for foo()'s local variables
     
-    mov     %edi, -20(%rbp)         ; store param in local stack slot
-    mov     -20(%rbp), %eax         ; load param into eax
-    add     %eax, %eax              ; multiply by 2 (param * 2)
-    mov     %eax, -4(%rbp)          ; store result in local_var
+    mov     %edi, -20(%rbp)         ; store param (from main's stack_var=5) in foo's stack slot
+    mov     -20(%rbp), %eax         ; load param (5) into eax accumulator
+    add     %eax, %eax              ; multiply by 2: eax = 5*2 = 10 (param * 2)
+    mov     %eax, -4(%rbp)          ; store result (10) in foo's local_var slot
     
-    mov     $4, %edi                ; sizeof(int) = 4 bytes
-    call    malloc                  ; call malloc(4)
-    mov     %rax, -16(%rbp)         ; store malloc return (heap_ptr)
+    mov     $4, %edi                ; edi = sizeof(int) = 4 bytes (1st parameter for malloc)
+    call    malloc                  ; call malloc(4) - malloc will return address in rax
+    mov     %rax, -16(%rbp)         ; store malloc's return value (heap address) in foo's heap_ptr slot
     
-    mov     -4(%rbp), %eax          ; load local_var
-    add     $10, %eax               ; add 10 to local_var
-    mov     -16(%rbp), %rdx         ; load heap_ptr
-    mov     %eax, (%rdx)            ; store (local_var + 10) at *heap_ptr
+    mov     -4(%rbp), %eax          ; load local_var (10) into eax
+    add     $10, %eax               ; add 10 to local_var: eax = 10 + 10 = 20
+    mov     -16(%rbp), %rdx         ; load heap_ptr (heap address) into rdx
+    mov     %eax, (%rdx)            ; store 20 at the heap address pointed to by rdx
     
-    mov     -16(%rbp), %rdx         ; load heap_ptr for printf
-    mov     (%rdx), %esi            ; load *heap_ptr (heap value)
-    mov     -4(%rbp), %edx          ; load local_var
-    mov     $.LC0, %edi             ; load format string address
-    mov     $0, %eax                ; clear eax (printf requirement)
-    call    printf                  ; call printf
+    mov     -16(%rbp), %rdx         ; load heap_ptr into rdx for printf arguments
+    mov     (%rdx), %esi            ; load *heap_ptr (20) into esi (2nd printf parameter)
+    mov     -4(%rbp), %edx          ; load local_var (10) into edx (3rd printf parameter)
+    mov     $.LC0, %edi             ; load format string address into edi (1st printf parameter)
+    mov     $0, %eax                ; clear eax (printf requirement for variadic functions)
+    call    printf                  ; call printf with format string and values
     
-    mov     -16(%rbp), %rdi         ; load heap_ptr
-    call    free                    ; call free(heap_ptr)
+    mov     -16(%rbp), %rdi         ; load heap_ptr into rdi (1st parameter for free)
+    call    free                    ; call free(heap_ptr) to deallocate heap memory
     
-    add     $24, %rsp               ; deallocate local variables
-    pop     %rbp                    ; restore caller's frame pointer
-    ret                             ; return to caller
+    add     $24, %rsp               ; deallocate foo()'s local variables (restore stack pointer)
+    pop     %rbp                    ; restore main()'s frame pointer from stack
+    ret                             ; return to main() (address stored on stack during call)
 
 main:
-    push    %rbp                    ; save caller's frame pointer
-    mov     %rsp, %rbp              ; set up new frame pointer
-    sub     $16, %rsp               ; allocate 16 bytes for local variables
+    push    %rbp                    ; save OS/runtime's frame pointer (caller = OS runtime)
+    mov     %rsp, %rbp              ; set up main()'s frame pointer base
+    sub     $16, %rsp               ; allocate 16 bytes for main()'s local variables
     
-    movl    $5, -4(%rbp)            ; store 5 in stack_var
-    mov     -4(%rbp), %edi          ; load stack_var as parameter
-    call    foo                     ; call foo(stack_var)
+    movl    $5, -4(%rbp)            ; store literal value 5 in main's stack_var slot
+    mov     -4(%rbp), %edi          ; load stack_var (5) into edi (1st parameter for foo)
+    call    foo                     ; call foo(stack_var=5) - pushes return address on stack
     
-    mov     $0, %eax                ; set return value to 0
-    add     $16, %rsp               ; deallocate local variables
-    pop     %rbp                    ; restore caller's frame pointer
-    ret                             ; return to OS
+    mov     $0, %eax                ; set main's return value to 0 (success status)
+    add     $16, %rsp               ; deallocate main()'s local variables (restore stack pointer)
+    pop     %rbp                    ; restore OS/runtime's frame pointer from stack
+    ret                             ; return to OS/runtime (program termination)
 
 .section .rodata
 .LC0:
