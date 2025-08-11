@@ -12,7 +12,7 @@ A comprehensive collection of educational materials covering memory management, 
 ### Programming Fundamentals
 - **[pointer_arithmetic.md](./pointer_arithmetic.md)** - Comprehensive guide to pointer operations and memory addressing
 - **[exercises.md](./exercises.md)** - 50 hands-on coding exercises for mastering pointer logic and complex control flow
-- **[Hints.md](./Hints.md)** - Detailed hints and testing strategies for each exercise (no solutions provided)
+- **[hints.md](./hints.md)** - Detailed hints and testing strategies for each exercise (no solutions provided)
 - **[tutorial.md](./tutorial.md)** - General programming tutorials and examples
 
 ### System References
