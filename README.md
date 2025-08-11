@@ -5,7 +5,7 @@ A comprehensive collection of educational materials covering memory management, 
 ## Contents
 
 ### Core Memory Management
-- **[MemoryLayout.md](./MemoryLayout.md)** - Detailed explanation of program memory layout, stack vs heap, and step-by-step execution tracing
+- **[memorylayout_c.md](./memorylayout_c.md)** - Detailed explanation of program memory layout, stack vs heap, and step-by-step execution tracing
 - **[memorylayout_py.md](./memorylayout_py.md)** - Python memory management comparison, variable storage, and garbage collection concepts
 - **[memorylayout_asm.md](./memorylayout_asm.md)** - Assembly language perspective on memory and low-level system operations
 
@@ -43,10 +43,10 @@ A comprehensive collection of educational materials covering memory management, 
 
 ## Getting Started
 
-1. Start with **[MemoryLayout.md](./MemoryLayout.md)** for foundational C memory concepts
+1. Start with **[memorylayout_c.md](./memorylayout_c.md)** for foundational C memory concepts
 2. Review **[pointer_arithmetic.md](./pointer_arithmetic.md)** for pointer operations
 3. **Practice with [exercises.md](./exercises.md)** - 50 progressive coding challenges to master pointer logic
-4. Use **[Hints.md](./Hints.md)** when stuck - provides guidance without giving away solutions
+4. Use **[hints.md](./hints.md)** when stuck - provides guidance without giving away solutions
 5. Compare with **[memorylayout_py.md](./memorylayout_py.md)** to understand modern language approaches
 6. Explore **[memorylayout_asm.md](./memorylayout_asm.md)** for low-level system understanding
 
