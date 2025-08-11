@@ -12,6 +12,7 @@ A comprehensive collection of educational materials covering memory management, 
 ### Programming Fundamentals
 - **[pointer_arithmetic.md](./pointer_arithmetic.md)** - Comprehensive guide to pointer operations and memory addressing
 - **[exercises.md](./exercises.md)** - 50 hands-on coding exercises for mastering pointer logic and complex control flow
+- **[Hints.md](./Hints.md)** - Detailed hints and testing strategies for each exercise (no solutions provided)
 - **[tutorial.md](./tutorial.md)** - General programming tutorials and examples
 
 ### System References
@@ -45,8 +46,9 @@ A comprehensive collection of educational materials covering memory management, 
 1. Start with **[MemoryLayout.md](./MemoryLayout.md)** for foundational C memory concepts
 2. Review **[pointer_arithmetic.md](./pointer_arithmetic.md)** for pointer operations
 3. **Practice with [exercises.md](./exercises.md)** - 50 progressive coding challenges to master pointer logic
-4. Compare with **[memorylayout_py.md](./memorylayout_py.md)** to understand modern language approaches
-5. Explore **[memorylayout_asm.md](./memorylayout_asm.md)** for low-level system understanding
+4. Use **[Hints.md](./Hints.md)** when stuck - provides guidance without giving away solutions
+5. Compare with **[memorylayout_py.md](./memorylayout_py.md)** to understand modern language approaches
+6. Explore **[memorylayout_asm.md](./memorylayout_asm.md)** for low-level system understanding
 
 ## Target Audience
 

@@ -5,15 +5,28 @@
 ## Basic Pointer Logic (Problems 1-10)
 
 ### Problem 1: Pointer Swap Chain
+
+**Problem Description:**
+You must implement a circular shift operation on an array of integer pointers. The function should move all pointers one position to the right, with the last pointer wrapping around to the first position. The challenge includes handling NULL pointers in the array and implementing the shift using complex branching logic.
+
+**Rules:**
+- Perform a circular right shift on the pointer array
+- Handle NULL pointers gracefully (they should also shift positions)
+- Use nested loops and conditional branches for the implementation
+- Do not lose any pointers during the operation
+- Test edge cases: all NULL pointers, single element, empty array
+
+**Complexity Requirements:**
+- Must use at least one nested loop structure
+- Include conditional logic for NULL pointer handling
+- Implement boundary checking and validation
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
 
-// Complete this function to perform circular shift right on pointer array
 void circular_shift_pointers(int **ptr_array, int size) {
-    // TODO: Implement circular shift with NULL pointer handling
-    // Use nested loops and conditional branches for edge cases
-    // Example: [ptr1, ptr2, ptr3, ptr4, ptr5] -> [ptr5, ptr1, ptr2, ptr3, ptr4]
+    // TODO: Implement circular shift right operation
 }
 
 int main() {
@@ -45,20 +58,35 @@ int main() {
 3. How do you implement the circular shift without losing the last element?
 
 ### Problem 2: Static Counter with Pointer Access
+
+**Problem Description:**
+Create a function that maintains a static counter with complex increment rules. The function should return a pointer to the counter only under specific conditions, and the increment behavior should change based on access patterns and counter state.
+
+**Rules:**
+- Use static variables to maintain state between function calls
+- Implement different increment behaviors based on increment_type parameter
+- Return pointer to counter only when counter is multiple of 7 OR 13
+- Track total access count and modify behavior after every 5 accesses
+- Use complex branching to determine increment amounts
+
+**Increment Types:**
+1. Type 1: Simple addition of base_value
+2. Type 2: Conditional increment based on counter parity
+3. Type 3: Fibonacci-style increment pattern using base_value as multiplier
+
+**Complexity Requirements:**
+- Multiple static variables for state management
+- Nested conditional logic for increment calculations
+- Access pattern tracking with behavioral changes
+
 ```c
 #include <stdio.h>
 
-// Complete this function with complex static counter logic
 int* get_counter_pointer(int increment_type, int base_value) {
     static int counter = 0;
     static int access_count = 0;
     
-    // TODO: Implement complex increment logic based on conditions:
-    // - increment_type 1: add base_value
-    // - increment_type 2: add base_value * 2 if counter is even, base_value / 2 if odd
-    // - increment_type 3: fibonacci-like increment using base_value
-    // - Return pointer only if counter is multiple of 7 OR 13
-    // - Track access_count and modify behavior after every 5 accesses
+    // TODO: Implement complex increment and return logic
 }
 
 int main() {
@@ -82,19 +110,29 @@ int main() {
 3. What's the counter value after the 20th call?
 
 ### Problem 3: Dynamic Pointer Array Builder
+
+**Problem Description:**
+Build a dynamic array of integer pointers where the array size follows complex rules based on input value. Each pointer should point to a dynamically allocated integer with values following a specific mathematical pattern. The function must handle allocation failures gracefully.
+
+**Rules:**
+- Size determination: even input → input/2 pointers, odd input > 10 → input*2 pointers, otherwise → input+5 pointers
+- Each pointer points to dynamically allocated integer
+- Values follow alternating sign spiral pattern: 1, -2, 3, -4, 5, -6, ...
+- Handle negative inputs appropriately
+- Implement comprehensive error checking and cleanup on failure
+
+**Complexity Requirements:**
+- Nested loops for allocation and initialization
+- Complex conditional logic for size calculation
+- Error handling with partial cleanup capability
+- Memory leak prevention
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
 
-// Complete this function with complex allocation rules
 int** build_dynamic_pointer_array(int input, int *actual_size) {
-    // TODO: Implement dynamic allocation with complex rules:
-    // - if input is even: allocate input/2 pointers
-    // - if input is odd and > 10: allocate input*2 pointers  
-    // - otherwise: allocate input+5 pointers
-    // - Initialize each pointer to point to dynamically allocated int
-    // - Values should follow spiral pattern: 1, -2, 3, -4, 5, -6, ...
-    // - Handle allocation failures with nested error checking
+    // TODO: Implement dynamic allocation with complex rules
 }
 
 void cleanup_pointer_array(int **arr, int size) {
@@ -134,28 +172,35 @@ int main() {
 3. How do you ensure no memory leaks if allocation fails midway?
 
 ### Problem 4: Conditional Pointer Arithmetic
+
+**Problem Description:**
+Implement a complex array navigation algorithm using pointer arithmetic. The navigation direction depends on current value, movement history, and running statistics. The algorithm must handle boundary conditions and implement sophisticated decision-making logic.
+
+**Rules:**
+- Start navigation at specified array position
+- Direction determined by: current value sign, previous move patterns, running sum threshold
+- Change direction every 3 consecutive moves in same direction
+- When running sum > 50, prioritize moving toward smaller absolute values
+- Implement array boundary wrapping
+- Track all movement statistics and decision factors
+
+**Navigation Logic:**
+- Positive values suggest rightward movement
+- Negative values suggest leftward movement  
+- Override direction based on movement history and sum analysis
+- Handle edge cases: array boundaries, invalid positions, zero values
+
+**Complexity Requirements:**
+- While loop with multiple exit conditions
+- Complex conditional branching for direction decisions
+- State tracking with multiple variables
+- Boundary checking and wrapping logic
+
 ```c
 #include <stdio.h>
 
-// Complete this function with complex pointer movement logic
 int navigate_array(int *arr, int size, int start_pos, int steps) {
-    // TODO: Implement complex navigation logic:
-    // - Start at arr[start_pos]
-    // - For each step, decide direction based on:
-    //   * Current value: move right if positive, left if negative
-    //   * Previous moves: alternate direction every 3 moves in same direction
-    //   * Running sum: if sum > 50, prioritize moving toward smaller values
-    // - Track boundary conditions and wrap around if needed
-    // - Return final position or -1 if invalid navigation
-    
-    int *current_ptr = arr + start_pos;
-    int position = start_pos;
-    int move_count = 0;
-    int same_direction_count = 0;
-    int last_direction = 0; // 1 for right, -1 for left
-    int running_sum = 0;
-    
-    // TODO: Implement navigation logic with while loop and multiple conditions
+    // TODO: Implement complex navigation algorithm
 }
 
 int main() {
@@ -190,27 +235,39 @@ int main() {
 3. How do you track the "same direction count" accurately?
 
 ### Problem 5: Auto Variable Pointer Maze
+
+**Problem Description:**
+Create a "maze" navigation system using pointers to automatic variables of different types. The navigation path and rules depend on maze type and difficulty level. Variables should be modified during navigation, and the final result computed from visited values.
+
+**Rules:**
+- Navigate through automatic variables using pointers
+- Maze type determines which variable types to use (int, char, float, or mixed)
+- Difficulty affects navigation conditions and value modifications
+- Movement between variables based on current value conditions
+- Values modified during navigation according to position-dependent rules
+- Calculate final result from all visited values
+
+**Maze Types:**
+1. Integer maze: navigate through int variables only
+2. Character maze: navigate through char variables only
+3. Float maze: navigate through float variables only  
+4. Mixed maze: navigate across different types based on difficulty
+
+**Complexity Requirements:**
+- Nested if-else structures for navigation decisions
+- Loops for repeated navigation attempts
+- Type conversion handling for mixed navigation
+- Complex mathematical operations for final result
+
 ```c
 #include <stdio.h>
 
-// Complete this function to implement pointer maze navigation
 int navigate_variable_maze(int maze_type, float difficulty) {
     int int_var1 = 10, int_var2 = 20, int_var3 = 30;
     char char_var1 = 'A', char_var2 = 'B', char_var3 = 'C';
     float float_var1 = 1.5f, float_var2 = 2.5f, float_var3 = 3.5f;
     
-    // TODO: Create maze navigation using pointers to these variables
-    // - maze_type 1: navigate through int variables
-    // - maze_type 2: navigate through char variables  
-    // - maze_type 3: navigate through float variables
-    // - maze_type 4: mixed navigation based on difficulty
-    // 
-    // Navigation rules:
-    // - Start at first variable of chosen type
-    // - Move to next variable if current value meets condition
-    // - Modify values during navigation based on position
-    // - Use nested if-else and loops for complex logic
-    // - Return final sum/product of all visited values
+    // TODO: Implement maze navigation logic
 }
 
 int main() {
