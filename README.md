@@ -1,22 +1,24 @@
 # C Programming Memory Concepts & Tutorials
 
-A comprehensive collection of educational materials covering memory management, system programming concepts, and comparative programming language analysis.
+Master C programming’s memory management and pointers through a deep dive into their inner workings with targeted, hands-on exercises.
 
 ## Contents
+
+### Fundamentals
+- **[tutorial.md](./tutorial.md)** - Introduction to Memory Management in C
+- **[pointer_arithmetic.md](./pointer_arithmetic.md)** - Comprehensive guide to pointer operations and memory addressing
 
 ### Core Memory Management
 - **[memorylayout_c.md](./memorylayout_c.md)** - Detailed explanation of program memory layout, stack vs heap, and step-by-step execution tracing
 - **[memorylayout_py.md](./memorylayout_py.md)** - Python memory management comparison, variable storage, and garbage collection concepts
 - **[memorylayout_asm.md](./memorylayout_asm.md)** - Assembly language perspective on memory and low-level system operations
 
-### Programming Fundamentals
-- **[pointer_arithmetic.md](./pointer_arithmetic.md)** - Comprehensive guide to pointer operations and memory addressing
-- **[exercises.md](./exercises.md)** - 50 hands-on coding exercises for mastering pointer logic and complex control flow
-- **[hints.md](./hints.md)** - Detailed hints and testing strategies for each exercise (no solutions provided)
-- **[tutorial.md](./tutorial.md)** - General programming tutorials and examples
-
 ### System References
 - **[page_ref.md](./page_ref.md)** - System-level memory management and paging concepts
+
+### Exercises
+- **[exercises.md](./exercises.md)** - 50 hands-on coding exercises for mastering pointer logic and complex control flow
+- **[hints.md](./hints.md)** - Detailed hints and testing strategies for each exercise 
 
 ## Key Topics Covered
 
@@ -45,8 +47,8 @@ A comprehensive collection of educational materials covering memory management, 
 
 1. Start with **[memorylayout_c.md](./memorylayout_c.md)** for foundational C memory concepts
 2. Review **[pointer_arithmetic.md](./pointer_arithmetic.md)** for pointer operations
-3. **Practice with [exercises.md](./exercises.md)** - 50 progressive coding challenges to master pointer logic
-4. Use **[hints.md](./hints.md)** when stuck - provides guidance without giving away solutions
+3. Practice with **[exercises.md](./exercises.md)** - 50 progressive coding challenges to master pointer logic
+4. Use **[hints.md](./hints.md)** when stuck - provides guidance without revealing solutions
 5. Compare with **[memorylayout_py.md](./memorylayout_py.md)** to understand modern language approaches
 6. Explore **[memorylayout_asm.md](./memorylayout_asm.md)** for low-level system understanding
 
