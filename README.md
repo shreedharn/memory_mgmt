@@ -45,12 +45,13 @@ Master C programming’s memory management and pointers through a deep dive into
 
 ## Getting Started
 
-1. Start with **[memorylayout_c.md](./memorylayout_c.md)** for foundational C memory concepts
-2. Review **[pointer_arithmetic.md](./pointer_arithmetic.md)** for pointer operations
-3. Practice with **[exercises.md](./exercises.md)** - 50 progressive coding challenges to master pointer logic
-4. Use **[hints.md](./hints.md)** when stuck - provides guidance without revealing solutions
-5. Compare with **[memorylayout_py.md](./memorylayout_py.md)** to understand modern language approaches
-6. Explore **[memorylayout_asm.md](./memorylayout_asm.md)** for low-level system understanding
+1. Begin with **[tutorial.md](./tutorial.md)** for an introduction to C memory management
+2. Study **[pointer_arithmetic.md](./pointer_arithmetic.md)** for comprehensive understanding of pointer operations
+3. Dive deep into **[memorylayout_c.md](./memorylayout_c.md)** for detailed memory layout concepts
+4. Compare with **[memorylayout_py.md](./memorylayout_py.md)** and **[memorylayout_asm.md](./memorylayout_asm.md)** for language perspectives
+5. Reference **[page_ref.md](./page_ref.md)** for system-level memory management concepts
+6. Practice with **[exercises.md](./exercises.md)** - 50 progressive coding challenges to master pointer logic
+7. Use **[hints.md](./hints.md)** when stuck - provides guidance without revealing solutions
 
 ## Target Audience
 
